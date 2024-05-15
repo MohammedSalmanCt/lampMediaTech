@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "99260951523",
+    "project_id": "uaetask-b3731",
+    "storage_bucket": "uaetask-b3731.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99260951523:android:dbbab2c4917b3ec6444ed6",
+        "android_client_info": {
+          "package_name": "com.example.uae_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpmAABRe4BLrKEqbBa9uM3KUGXc5tDujU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
