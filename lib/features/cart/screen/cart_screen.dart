@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uae_task/features/authentication/controller/auth_controller.dart';
@@ -52,11 +53,15 @@ class CartScreen extends StatelessWidget {
                             childAspectRatio: width/height*1.3),
                         itemCount: userModel.cart.length ,
                         itemBuilder: (context, index) {
-                          return ref.watch(getProductModelProvider(userModel.cart[index])).when(data: (productModel) {
-                            return buildContainer(product: productModel,ref: ref,userModel: userModel,context: context);
+                          return ref.watch(getProductModelProvider(userModel.cart[index]))
+                              .when(data: (productModel) {
+                            return buildContainer(product: productModel,
+                                ref: ref,userModel: userModel,context: context);
                           },
                             error: (error, stackTrace) {
-                              print(error);
+                              if (kDebugMode) {
+                                print(error);
+                              }
                               return ErrorText(error: error.toString());
                             },
                             loading: () => const Loader(),
@@ -81,7 +86,9 @@ class CartScreen extends StatelessWidget {
                 );
               },
                 error: (error, stackTrace) {
-                  print(error);
+                  if (kDebugMode) {
+                    print(error);
+                  }
                   return ErrorText(error: error.toString());
                 },
                 loading: () => const Loader(),
@@ -125,7 +132,7 @@ class CartScreen extends StatelessWidget {
                     backgroundColor:Colors.red,
                     fixedSize: Size(width*(0.5), height*(0.06))
                 ),
-                child:  Text("Remove"),)
+                child: const Text("Remove"),)
             ],
           )
 

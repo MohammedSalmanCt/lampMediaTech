@@ -13,13 +13,15 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 class _LoginScreenState extends State<LoginScreen> {
+  /// focus nodes
  FocusNode f1=FocusNode();
  FocusNode f2=FocusNode();
   final passwordVisibilityProvider=StateProvider((ref) => false);
+  /// TextEditingController
   final TextEditingController userName=TextEditingController();
   final TextEditingController password=TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+/// login function
   getLogin(WidgetRef ref,BuildContext context){
     if(userName.text.trim().isNotEmpty&&password.text.trim().isNotEmpty){
       ref.read(authControllerProvider.notifier).userLogin(userName: userName.text.trim(), password: password.text, context: context);
@@ -29,6 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
       showSnackBarOfFailure(context,"Please Enter Username" ):
       showSnackBarOfFailure(context,"Please Enter Password" );
     }
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    userName.dispose();
+    password.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -224,6 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                     ),
                     SizedBox(height: height*0.1,),
+                    /// login button
                     Consumer(
                         builder: (context,ref,child) {
                           return GestureDetector(

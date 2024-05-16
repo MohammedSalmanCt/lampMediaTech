@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -20,8 +21,12 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  /// search controller
   TextEditingController searchController=TextEditingController();
-
+  ///search provider
+  final searchProvider = StateProvider<String>((ref) {
+    return "";
+  });
   /// logout function
   void logOut({required WidgetRef ref, required BuildContext context}) {
     ref.read(authControllerProvider.notifier).logOut(context);
@@ -62,7 +67,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   body: Padding(
                     padding:  EdgeInsets.only(right:width*(0.05),left: width*(0.05),top: width*(0.05), ),
                     child: SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -149,13 +154,17 @@ class _ProductScreenState extends State<ProductScreen> {
                                       }
                                     },
                                     error: (error, stackTrace) {
-                                      print(error);
+                                      if (kDebugMode) {
+                                        print(error);
+                                      }
                                       return ErrorText(error: error.toString());
                                     },
                                     loading: () => const Loader(),
                                   );
                                 },error: (error, stackTrace) {
-                                  print(error);
+                                  if (kDebugMode) {
+                                    print(error);
+                                  }
                                   return ErrorText(error: error.toString());
                                 },
                                   loading: () => const Loader(),
@@ -167,13 +176,13 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   ),
               floatingActionButton: FloatingActionButton(onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>const CartScreen(),));
               },
-                child: Icon(Icons.add_shopping_cart,
-                  color: Colors.black,),
                 backgroundColor: Colors.blue,
                 tooltip: "Cart",
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                child:const Icon(Icons.add_shopping_cart,
+                  color: Colors.black,),
               ),
                 );
           }

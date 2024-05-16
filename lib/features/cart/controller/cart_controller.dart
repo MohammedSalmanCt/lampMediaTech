@@ -1,12 +1,8 @@
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uae_task/core/commons/storage_repository.dart';
 import 'package:uae_task/core/global_variables/global_variables.dart';
 import 'package:uae_task/features/cart/repository/cart_repository.dart';
-import 'package:uae_task/features/products/repository/product_repository.dart';
 import '../../../core/utils.dart';
 import '../../../models/product_model.dart';
 import '../../../models/user_model.dart';

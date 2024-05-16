@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uae_task/models/product_model.dart';
 import 'package:uae_task/models/user_model.dart';
 /// mediaQuery variables
 double height=0;
@@ -10,10 +8,6 @@ double width=0;
 final userProvider = StateProvider<UserModel?>((ref) {
   return null;
 });
-final searchProvider = StateProvider<String>((ref) {
-  return "";
-});
-
 
   /// search function
 setSearchParam(String search){

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,7 +43,7 @@ class AuthController extends Notifier<bool>{
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductScreen(),
+                builder: (context) => const ProductScreen(),
               ),
                   (route) => false);
         }
@@ -56,7 +55,14 @@ class AuthController extends Notifier<bool>{
   Future<void> logOut(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('uid');
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen(),), (route) => false);
+    if(context.mounted){
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
+          (route) => false);
+    }
   }
   /// user stream
   Stream<UserModel> userStream({required String id})

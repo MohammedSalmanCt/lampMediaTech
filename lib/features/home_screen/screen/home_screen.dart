@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uae_task/core/commons/error_text.dart';
@@ -11,7 +12,7 @@ import '../../../models/product_model.dart';
 import '../../authentication/controller/auth_controller.dart';
 
 class HomeScreen extends StatelessWidget {
-   HomeScreen({super.key});
+   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +34,13 @@ class HomeScreen extends StatelessWidget {
                 tooltip:"LogOut",);
             }
           ),
-          title: Text(
+          title: const Text(
             "DashBoard"
           ),
           actions: [
             IconButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
-            }, icon: Icon(Icons.shopping_cart,))
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>const CartScreen(),));
+            }, icon:const Icon(Icons.shopping_cart,))
           ],
         ),
         body: Padding(
@@ -63,8 +64,8 @@ class HomeScreen extends StatelessWidget {
                       ),),
                       SizedBox(width: width*(0.02),),
                       IconButton(onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen(),));
-                      } , icon: Icon(Icons.arrow_forward)),
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ProductScreen(),));
+                      } , icon:const Icon(Icons.arrow_forward)),
                     ],
                   ),
                 ],
@@ -82,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                         shrinkWrap: true,
                         gridDelegate:const
                         SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: productList.length<6?productList.length:6,
                         itemBuilder: (context, index) {
                           return buildContainer(product:productList[index]);
@@ -90,7 +91,9 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                       error: (error, stackTrace) {
-                        print(error);
+                        if (kDebugMode) {
+                          print(error);
+                        }
                         return ErrorText(error: error.toString());
                       },
                       loading: () =>const Loader(),);
@@ -100,13 +103,13 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddProducts(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>const AddProducts(),));
         },
-          child: Icon(Icons.add,
-          color: Colors.black,),
           backgroundColor: Colors.blue,
           tooltip: "Add Product",
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child:const Icon(Icons.add,
+          color: Colors.black,),
         ),
       ),
     );
